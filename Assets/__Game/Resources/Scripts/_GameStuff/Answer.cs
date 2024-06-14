@@ -1,3 +1,4 @@
+using __Game.Resources.Scripts.EventBus;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -24,7 +25,6 @@ namespace Assets.__Game.Resources.Scripts._GameStuff
 
     private Camera _mainCamera;
     private CameraAnchor _cameraAnchor;
-    private AudioSource _audioSource;
 
     private void Awake()
     {
@@ -32,7 +32,6 @@ namespace Assets.__Game.Resources.Scripts._GameStuff
 
       _mainCamera = Camera.main;
       _cameraAnchor = GetComponent<CameraAnchor>();
-      _audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -76,7 +75,7 @@ namespace Assets.__Game.Resources.Scripts._GameStuff
 
       _offset = transform.position - new Vector3(worldPosition.x, worldPosition.y, 0f);
 
-      _audioSource.PlayOneShot(_clip);
+      EventBus<EventStructs.VariantAudioClickedEvent>.Raise(new EventStructs.VariantAudioClickedEvent { AudioClip = _clip });
     }
 
     public void OnPointerUp(PointerEventData eventData)
