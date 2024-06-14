@@ -1,6 +1,7 @@
 ﻿using DG.Tweening;
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.__Game.Resources.Scripts._GameStuff
 {
@@ -8,9 +9,18 @@ namespace Assets.__Game.Resources.Scripts._GameStuff
   {
     public event Action<bool> Received;
 
+    [SerializeField] private Sprite _sprite;
+    [Space]
+    [SerializeField] private Image _image;
+    [Header("")]
     [SerializeField] private string _value;
 
     public bool CanReceive { get; private set; } = true;
+
+    private void Start()
+    {
+      _image.sprite = _sprite;
+    }
 
     public void Receive(Answer answer)
     {
